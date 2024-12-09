@@ -10,32 +10,32 @@ import edu.kis.powp.jobs2d.features.DrawerFeature;
  * driver adapter to drawer with several bugs.
  */
 public class DrawerAdapter extends DrawPanelController implements Job2dDriver {
-	private int startX = 0, startY = 0;
-	private DrawPanelController drawPanelController;
+    private int startX = 0, startY = 0;
+    private final DrawPanelController drawPanelController;
 
-	public DrawerAdapter() {
-		super();
-		this.drawPanelController = DrawerFeature.getDrawerController();
-	}
+    public DrawerAdapter() {
+        super();
+        this.drawPanelController = DrawerFeature.getDrawerController();
+    }
 
-	@Override
-	public void setPosition(int x, int y) {
-		this.startX = x;
-		this.startY = y;
-	}
+    @Override
+    public void setPosition(int x, int y) {
+        this.startX = x;
+        this.startY = y;
+    }
 
-	@Override
-	public void operateTo(int x, int y) {
-		ILine line = LineFactory.getBasicLine();
-		line.setStartCoordinates(this.startX, this.startY);
-		line.setEndCoordinates(x, y);
+    @Override
+    public void operateTo(int x, int y) {
+        ILine line = LineFactory.getBasicLine();
+        line.setStartCoordinates(this.startX, this.startY);
+        line.setEndCoordinates(x, y);
 
-		this.drawPanelController.drawLine(line);
-		setPosition(x, y);
-	}
+        this.drawPanelController.drawLine(line);
+        setPosition(x, y);
+    }
 
-	@Override
-	public String toString() {
-		return "@Q!$!@$!#@$(*#@&Q(%^*#@";
-	}
+    @Override
+    public String toString() {
+        return "Solid Line Simulator";
+    }
 }
