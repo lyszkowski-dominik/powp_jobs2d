@@ -1,6 +1,6 @@
 package edu.kis.powp.jobs2d;
 
-import java.awt.EventQueue;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -9,6 +9,7 @@ import edu.kis.legacy.drawer.panel.DefaultDrawerFrame;
 import edu.kis.legacy.drawer.panel.DrawPanelController;
 import edu.kis.powp.appbase.Application;
 import edu.kis.powp.jobs2d.drivers.adapter.DrawerAdapter;
+import edu.kis.powp.jobs2d.drivers.adapter.LineDrawerAdapter;
 import edu.kis.powp.jobs2d.events.SelectChangeVisibleOptionListener;
 import edu.kis.powp.jobs2d.events.FigureButtonListener;
 import edu.kis.powp.jobs2d.features.DrawerFeature;
@@ -39,8 +40,13 @@ public class TestJobs2dPatterns {
         DriverFeature.addDriver("Logger Driver", loggerDriver);
         DriverFeature.getDriverManager().setCurrentDriver(loggerDriver);
 
-        Job2dDriver testDriver = new DrawerAdapter();
-        DriverFeature.addDriver("Solid Line Simulator", testDriver);
+        Job2dDriver solidDriver = new DrawerAdapter();
+        DriverFeature.addDriver("Custom Line Driver", solidDriver);
+
+        Job2dDriver specialDriver = new LineDrawerAdapter();
+        DriverFeature.addDriver("Special Line Driver", specialDriver);
+
+        setupLineParams(application, (DrawerAdapter) solidDriver);
 
         DriverFeature.updateDriverInfo();
     }
@@ -73,6 +79,18 @@ public class TestJobs2dPatterns {
         application.addComponentMenuElement(Logger.class, "Severe level",
                 (ActionEvent e) -> logger.setLevel(Level.SEVERE));
         application.addComponentMenuElement(Logger.class, "OFF logging", (ActionEvent e) -> logger.setLevel(Level.OFF));
+    }
+    /**
+     *  Setup for adjusting line parameters
+     * @param application Application context
+     */
+    private static void setupLineParams(Application application, DrawerAdapter drawerAdapter){
+        application.addComponentMenu(DrawerAdapter.class, "Line Params");
+        application.addComponentMenuElement(DrawerAdapter.class, "Color: Red", (ActionEvent e) -> drawerAdapter.setLineColor(Color.RED));
+        application.addComponentMenuElement(DrawerAdapter.class, "Color: Blue", (ActionEvent e) -> drawerAdapter.setLineColor(Color.BLUE));
+        application.addComponentMenuElement(DrawerAdapter.class, "Thickness: 1.0f", (ActionEvent e) -> drawerAdapter.setThickness(1.0f));
+        application.addComponentMenuElement(DrawerAdapter.class, "Thickness: 2.0f", (ActionEvent e) -> drawerAdapter.setThickness(2.0f));
+        application.addComponentMenuElementWithCheckBox(DrawerAdapter.class, "Dotted", (ActionEvent e) -> drawerAdapter.setIsDotted(!drawerAdapter.getIsDotted()), false);
     }
 
     /**
