@@ -88,6 +88,7 @@ public class TestJobs2dPatterns {
         application.addComponentMenu(DrawerAdapter.class, "Line Params");
         application.addComponentMenuElement(DrawerAdapter.class, "Color: Red", (ActionEvent e) -> drawerAdapter.setLineColor(Color.RED));
         application.addComponentMenuElement(DrawerAdapter.class, "Color: Blue", (ActionEvent e) -> drawerAdapter.setLineColor(Color.BLUE));
+        application.addComponentMenuElement(DrawerAdapter.class, "Color: Black", (ActionEvent e) -> drawerAdapter.setLineColor(Color.BLACK));
         application.addComponentMenuElement(DrawerAdapter.class, "Thickness: 1.0f", (ActionEvent e) -> drawerAdapter.setThickness(1.0f));
         application.addComponentMenuElement(DrawerAdapter.class, "Thickness: 2.0f", (ActionEvent e) -> drawerAdapter.setThickness(2.0f));
         application.addComponentMenuElementWithCheckBox(DrawerAdapter.class, "Dotted", (ActionEvent e) -> drawerAdapter.setIsDotted(!drawerAdapter.getIsDotted()), false);
