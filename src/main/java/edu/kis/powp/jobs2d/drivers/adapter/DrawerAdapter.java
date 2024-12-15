@@ -10,7 +10,7 @@ import java.awt.*;
 /**
  * driver adapter to drawer with several bugs.
  */
-public class DrawerAdapter extends DrawPanelController implements Job2dDriver {
+public class DrawerAdapter implements Job2dDriver {
     private int startX = 0, startY = 0;
     private final DrawPanelController drawPanelController;
     private Color lineColor = Color.BLACK;
