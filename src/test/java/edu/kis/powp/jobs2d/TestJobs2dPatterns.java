@@ -8,6 +8,8 @@ import java.util.logging.Logger;
 import edu.kis.legacy.drawer.panel.DefaultDrawerFrame;
 import edu.kis.legacy.drawer.panel.DrawPanelController;
 import edu.kis.powp.appbase.Application;
+import edu.kis.powp.command.ComplexCommand;
+import edu.kis.powp.command.ComplexCommandFactory;
 import edu.kis.powp.jobs2d.drivers.adapter.DrawerAdapter;
 import edu.kis.powp.jobs2d.drivers.adapter.LineDrawerAdapter;
 import edu.kis.powp.jobs2d.events.SelectChangeVisibleOptionListener;
@@ -28,6 +30,18 @@ public class TestJobs2dPatterns {
     private static void setupPresetTests(Application application) {
         application.addTest("Test Figure 1", new FigureButtonListener(DriverFeature.getDriverManager(), new Figure1TestStrategy()));
         application.addTest("Test Figure 2", new FigureButtonListener(DriverFeature.getDriverManager(), new Figure2TestStrategy()));
+    }
+
+    private static void setupShapeTests(Application application) {
+        application.addTest("Test Create Rectangle", new FigureButtonListener(DriverFeature.getDriverManager(), driverManager -> {
+            ComplexCommand rectangleCommand = ComplexCommandFactory.createRectangle(driverManager.getCurrentDriver(), 0, 0, 100, 50);
+            rectangleCommand.execute();
+        }));
+
+        application.addTest("Test Create Triangle", new FigureButtonListener(DriverFeature.getDriverManager(), driverManager -> {
+            ComplexCommand triangleCommand = ComplexCommandFactory.createTriangle(0, 0, 50, 100, 100, 0, driverManager.getCurrentDriver());
+            triangleCommand.execute();
+        }));
     }
 
     /**
@@ -108,6 +122,7 @@ public class TestJobs2dPatterns {
                 setupDrivers(app);
                 setupPresetTests(app);
                 setupLogger(app);
+                setupShapeTests(app);
 
                 app.setVisibility(true);
             }
